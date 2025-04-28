@@ -59,8 +59,8 @@ def index_page():
         ui.html('''
             <iframe
                 src="http://127.0.0.1:8080/my_camera"
-                width="640"
-                height="480"
+                width="480"
+                height="360"
                 class="rounded shadow-lg border-2 border-gray-600"
             ></iframe>
         ''')
