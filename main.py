@@ -34,34 +34,37 @@ def index_page():
       rel="stylesheet"
     />
     <style>
-      /* NiceGUI varsayılan arkaplanını geçersiz kılmak için */
+      /* NiceGUI varsayılan arkaplanını koyu yapalım */
       html, body, .q-page {
           margin: 0;
           padding: 0;
-          background-color: #121212 !important; /* Tam koyu renk */
-          color: #FFFFFF !important;            /* Yazı rengi */
+          background-color: #121212 !important; /* Koyu arka plan */
+          color: #FFFFFF !important;           /* Beyaz metin */
       }
     </style>
     """)
 
-    with ui.column().classes('items-center justify-center min-h-screen'):
+    with ui.column().classes('w-full max-w-4xl mx-auto mt-10 space-y-4'):
         ui.label('Kamera ve Sensör Verileri').classes(
-            'text-3xl font-bold mb-4 text-gray-50'
+            'text-3xl font-bold'
         )
 
-        with ui.row().classes('justify-around w-full max-w-xl mb-4'):
-            ui.label('Temperature: 25°C').classes('text-xl text-gray-50')
-            ui.label('pH: 7.2').classes('text-xl text-gray-50')
-            ui.label('Humidity: 55%').classes('text-xl text-gray-50')
+        # Sensör bilgilerinin yatayda sıralanması
+        with ui.row().classes('justify-center space-x-8'):
+            ui.label('Temperature: 25°C').classes('text-lg')
+            ui.label('pH: 7.2').classes('text-lg')
+            ui.label('Humidity: 55%').classes('text-lg')
 
+        # Kamera akışını iframe ile ekle
         ui.html('''
-            <iframe 
-                src="http://127.0.0.1:8080/my_camera" 
-                width="640" 
+            <iframe
+                src="http://127.0.0.1:8080/my_camera"
+                width="640"
                 height="480"
-                class="rounded shadow-lg border-2 border-gray-500">
-            </iframe>
+                class="rounded shadow-lg border-2 border-gray-600"
+            ></iframe>
         ''')
+
 
 camera_thread = threading.Thread(target=run_camera, daemon=True)
 camera_thread.start()
